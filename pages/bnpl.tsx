@@ -3,15 +3,21 @@ import Head from "./components/Head";
 import PayPal from "./components/PayPal"
 import DataMissing from "./components/DataMissing"
 
-const BNPL: NextPage = () => {
+interface Props {
+  some?: any;
+  amount?:any;
+}
+
+export default function BNPL(props: Props): JSX.Element {
+  
   const currency = "USD";
   const amount = "23.00";
 
   const initialOptions = {
     "client-id":
       "AWJ-DLH5hobVNYjhkFWihZZaSrN_IiVYmlkg5KyVazdt2AkWEdrwDSlnMLitGeC5N1EGER_P1rFIyC6W",
-    currency: "USD",
-    intent: "capture",
+    "currency": "USD",
+    "intent": "capture",
     "buyer-country": "US", // this is needed only for sandbox testing
   };
 
@@ -25,12 +31,10 @@ const BNPL: NextPage = () => {
            * If not render Not availale options <DataMissing />
            */}
           <div className="lockscreen-item">
-            <PayPal initialOptions={initialOptions} currency={"USD"} amount={"23.00"}/>
+            <PayPal currency={currency} amount={amount} />
            </div>
         </div>
       </div>
     </div>
   );
 };
-
-export default BNPL;

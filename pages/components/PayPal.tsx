@@ -1,18 +1,24 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import type { NextPage } from "next";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 interface Props {
-  initialOptions?: any;
-  title?: string;
+  "currency"?: any;
+  "amount"?:any
 }
 
-const PayPal: NextPage = (props: Props) => {
+export default function PayPal(props: Props): JSX.Element {
+
   const {currency, amount} = props
+  const options = {
+    "client-id":
+      "AWJ-DLH5hobVNYjhkFWihZZaSrN_IiVYmlkg5KyVazdt2AkWEdrwDSlnMLitGeC5N1EGER_P1rFIyC6W",
+    "currency": "USD",
+    "intent": "capture",
+    "buyer-country": "US", // this is needed only for sandbox testing
+  };
   return (
     <div>
-        <PayPalScriptProvider options={props.initialOptions}>
+        <PayPalScriptProvider options={options}>
               <PayPalButtons
                 style={{ layout: "vertical" }}
                 createOrder={(data, actions) => {
@@ -46,4 +52,3 @@ const PayPal: NextPage = (props: Props) => {
   );
 };
 
-export default PayPal;
